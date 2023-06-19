@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 export async function search(req: FastifyRequest, rep: FastifyReply) {
   const searchGymsQuerySchema = z.object({
-    q: z.string(),
+    q: z.coerce.string(),
     page: z.coerce.number().min(1).default(1),
   })
 
@@ -17,7 +17,7 @@ export async function search(req: FastifyRequest, rep: FastifyReply) {
     page,
   })
 
-  return rep.status(201).send({
+  return rep.status(200).send({
     gyms,
   })
 }
